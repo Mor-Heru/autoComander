@@ -111,5 +111,6 @@ using namespace std;
     }
 
     void Comand::execute(int id){
+        system("clear");
         system(comandsList[id][2].c_str());
     }
