@@ -4,13 +4,21 @@
 #include <string>
 #include <fstream>
 #include <cstdlib>
+#include <filesystem>
 
 using namespace std;
+
+namespace {
+    filesystem::path commandsCsvPath() {
+        return filesystem::read_symlink("/proc/self/exe").parent_path()
+            / "data/comands.csv";
+    }
+}
 
     string Comand::loadCSV(){
         string csv,l;
 
-        ifstream csvWithComands("data/comands.csv");
+        ifstream csvWithComands(commandsCsvPath());
 
         // Use a while loop together with the getline() function to read the file line by line
         while (getline (csvWithComands, l)) {
@@ -22,7 +30,7 @@ using namespace std;
     }
 
     void Comand::saveComandsInCSV(){
-        ofstream csvWithSavedComands("data/comands.csv");//pobranie pliku
+        ofstream csvWithSavedComands(commandsCsvPath());//pobranie pliku
 
         string comand="";
 
@@ -38,7 +46,7 @@ using namespace std;
     }
 
     void Comand::loadComandsFromCSV(){
-        ifstream csvWithSavedComands("data/comands.csv");//pobranie pliku
+        ifstream csvWithSavedComands(commandsCsvPath());//pobranie pliku
             
         array <string,3> readingComand;//array do przechowywania nazwy i wartosci komendy, która w tej chwili jest przepisywana
         int whichPart; // przechowyje która czesc jest teraz przepisywana
@@ -89,7 +97,7 @@ using namespace std;
 
         string csv=loadCSV();
 
-        ofstream csvToSavedComands("data/comands.csv");//pobranie pliku
+        ofstream csvToSavedComands(commandsCsvPath());//pobranie pliku
         csvToSavedComands << csv+lineCSV;
         csvToSavedComands.close();
         numberOfComands++;
