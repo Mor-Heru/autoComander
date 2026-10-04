@@ -15,7 +15,7 @@ Line::Line(int i, string n, string d, string c, Comand& co)
 
 
 // ============================================================
-// RYSOWANIE LINII
+// DRAW ROW
 // ============================================================
 
 void Line::createLine(bool selected=false,int selectedButton=0)
@@ -38,7 +38,7 @@ void Line::createLine(bool selected=false,int selectedButton=0)
 
 
 // ============================================================
-// ZAZNACZENIE
+// SELECTION
 // ============================================================
 
 void Line::setSelected(bool selected, int selectedButton)

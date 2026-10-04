@@ -219,7 +219,7 @@ Terminal::Terminal()
     RebuildLines();
 
     // --------------------------------------------------------
-    // WYBÓR
+    // SELECTION
     // --------------------------------------------------------
 
     int selectedLine = 0;
@@ -228,11 +228,11 @@ Terminal::Terminal()
     // 1 = EDIT
     int selectedButton = 0;
 
-    // Czy zaznaczony jest ADD NEW COMMAND
+    // Whether ADD NEW COMMAND is selected.
     bool selectedAdd = false;
 
     // --------------------------------------------------------
-    // GŁÓWNA PĘTLA
+    // MAIN LOOP
     // --------------------------------------------------------
 
     while (true)
@@ -242,18 +242,18 @@ Terminal::Terminal()
         int key = getch();
 
         // ====================================================
-        // GÓRA
+        // UP
         // ====================================================
 
         if (key == KEY_UP)
         {
             if (selectedAdd)
             {
-                // Już jesteśmy na ADD
+                // ADD is already selected.
             }
             else if (selectedLine == 0)
             {
-                // Z pierwszej komendy przechodzimy na ADD
+                // Move from the first command to ADD.
                 selectedAdd = true;
             }
             else
@@ -263,14 +263,14 @@ Terminal::Terminal()
         }
 
         // ====================================================
-        // DÓŁ
+        // DOWN
         // ====================================================
 
         else if (key == KEY_DOWN)
         {
             if (selectedAdd)
             {
-                // Z ADD przechodzimy do pierwszej komendy
+                // Move from ADD to the first command.
                 selectedAdd = false;
                 selectedLine = 0;
             }
@@ -284,7 +284,7 @@ Terminal::Terminal()
         }
 
         // ====================================================
-        // LEWO
+        // LEFT
         // ====================================================
 
         else if (key == KEY_LEFT)
@@ -297,7 +297,7 @@ Terminal::Terminal()
         }
 
         // ====================================================
-        // PRAWO
+        // RIGHT
         // ====================================================
 
         else if (key == KEY_RIGHT)
@@ -324,7 +324,7 @@ Terminal::Terminal()
                 CreateNewCommandWindow();
                 RebuildLines();
 
-                // Wracamy do listy komend
+                // Return to the command list.
                 selectedAdd = false;
 
                 if (!lines.empty())
@@ -349,7 +349,9 @@ Terminal::Terminal()
             {
                 if (selectedButton == 0)
                 {
+                    endwin();
                     lines[selectedLine].run();
+                    break;
                 }
                 else if (selectedButton == 1)
                 {
@@ -370,7 +372,7 @@ Terminal::Terminal()
         }
 
         // ====================================================
-        // A = SZYBKI DOSTĘP DO ADD
+        // A = QUICK ACCESS TO ADD
         // ====================================================
 
         else if (key == 'a' || key == 'A')
@@ -379,7 +381,7 @@ Terminal::Terminal()
         }
 
         // ====================================================
-        // Q = WYJŚCIE
+        // Q = QUIT
         // ====================================================
 
         else if (key == 'q' || key == 'Q')

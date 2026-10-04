@@ -30,7 +30,7 @@ namespace {
     }
 
     void Comand::saveComandsInCSV(){
-        ofstream csvWithSavedComands(commandsCsvPath());//pobranie pliku
+        ofstream csvWithSavedComands(commandsCsvPath());// Open the file.
 
         string comand="";
 
@@ -46,25 +46,25 @@ namespace {
     }
 
     void Comand::loadComandsFromCSV(){
-        ifstream csvWithSavedComands(commandsCsvPath());//pobranie pliku
+        ifstream csvWithSavedComands(commandsCsvPath());// Open the file.
             
-        array <string,3> readingComand;//array do przechowywania nazwy i wartosci komendy, która w tej chwili jest przepisywana
-        int whichPart; // przechowyje która czesc jest teraz przepisywana
+        array <string,3> readingComand;// Stores the name, description, and command currently being read.
+        int whichPart; // Tracks which field is currently being read.
 
         string lineWithComand;
-        while(getline(csvWithSavedComands,lineWithComand)){//odczyt pliku
+        while(getline(csvWithSavedComands,lineWithComand)){// Read the file.
 
-            whichPart=0;//resetowanie
+            whichPart=0;// Reset the field index.
             readingComand={"","",""};
 
             for(int i=0;i<lineWithComand.size();i++){
 
-                if(lineWithComand[i]=='\t'){//sprawdza czy znak nie jest tabem
+                if(lineWithComand[i]=='\t'){// Check whether the character is a tab.
                     whichPart++;
                     continue;
                 }
                     
-                readingComand[whichPart]+=lineWithComand[i];//przepisuje komendy
+                readingComand[whichPart]+=lineWithComand[i];// Append the character to the current field.
             }
 
             comandsList.push_back(readingComand);
@@ -97,7 +97,7 @@ namespace {
 
         string csv=loadCSV();
 
-        ofstream csvToSavedComands(commandsCsvPath());//pobranie pliku
+        ofstream csvToSavedComands(commandsCsvPath());// Open the file.
         csvToSavedComands << csv+lineCSV;
         csvToSavedComands.close();
         numberOfComands++;
