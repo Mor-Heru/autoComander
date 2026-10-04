@@ -114,6 +114,15 @@ namespace {
     }
 
     void Comand::editOne(int id,string name, string discription, string comand){
+        if(name==""){
+            name=comandsList[id][0];
+        }
+        if(discription==""){
+            discription=comandsList[id][1];
+        }
+        if(comand==""){
+            comand=comandsList[id][2];
+        }        
         comandsList[id]={name,discription,comand};
         saveComandsInCSV();
     }
